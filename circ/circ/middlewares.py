@@ -6,6 +6,8 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from circ.settings import *
+import random
 
 
 class CircSpiderMiddleware(object):
@@ -101,3 +103,16 @@ class CircDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class RandomUserAgentMiddleware(object):
+    def process_request(self, request, spider):
+        useragent = random.choice(spider.settings.get('USER_AGENT_LIST'))
+        request.headers['User-Agent'] = useragent
+
+
+class CheckUserAgent(object):
+    def process_response(self, request, response, spider):
+        # print(dir(response.request))
+        print(request.headers['User-Agent'])
+        return response

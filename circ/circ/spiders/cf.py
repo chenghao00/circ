@@ -31,13 +31,13 @@ class CfSpider(CrawlSpider):
         item["title"] = re.findall("<!--TitleStart-->(.*?)<!--TitleEnd-->", response.text)[0]
         item["publish_date"] = re.findall("发布时间：(20\d{2}-\d{2}-\d{2})", response.text)[0]
         print(item)
-        #return item
-        yield scrapy.Request(
-            url='',
-            callback=self.parse_detail,
-            meta={'item':item}
-        )
-
-    def parse_detail(self, response):
-        item=response.meta['item']
         yield item
+    #     yield scrapy.Request(
+    #         url='',
+    #         callback=self.parse_detail,
+    #         meta={'item':item}
+    #     )
+    #
+    # def parse_detail(self, response):
+    #     item=response.meta['item']
+    #     yield item
