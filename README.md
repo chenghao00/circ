@@ -6,6 +6,7 @@ Scrapy中CrawlSpider类
 
 2、不再有parse方法，被用做基础
 
+Rule(LinkExtractor(allow=r'/web/site0/tab5240/info\d+\.htm'), callback='parse_item'),
 3、LinkExtractor 连接提取器，提取url地址；callback 提取出来的url地址的response会交给callback处理；follow 当前url地址的响应是够重新进过rules来提取url地址，
 
 4、不指定callback函数的请求下，若follow为True，满足该Rule的url还会被继续请求
